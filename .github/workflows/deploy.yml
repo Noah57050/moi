@@ -18,7 +18,7 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests..."
-          # Ajoutez ici des commandes pour exécuter vos tests
+          # Add your test commands here if any, e.g., for HTML linting or link checking
           echo "Tests passed!"
 
   build:
@@ -37,8 +37,15 @@ jobs:
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Use v4 for better compatibility and latest features
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # For a simple HTML project, the path is '.' to upload all files in the repository root.
+          path: '.' 
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
